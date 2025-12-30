@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DO;
 
-public record coustomer
+public record Coustomer
 (   int id,
     string name,
     string adress,

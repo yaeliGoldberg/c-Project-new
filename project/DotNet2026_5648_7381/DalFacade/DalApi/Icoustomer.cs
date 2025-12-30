@@ -1,6 +1,8 @@
-﻿namespace DalApi
+﻿using DO;
+
+namespace DalApi
 {
-   public interface Icoustomer
+   public interface Icoustomer:Icrud<Coustomer>
     {
     }
 }

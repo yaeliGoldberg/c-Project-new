@@ -1,7 +1,9 @@
 ﻿
+using DO;
+
 namespace DalApi
 {
-    public interface Iproducts
+    public interface Iproducts : Icrud<Products>
     {
     }
 }

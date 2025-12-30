@@ -1,4 +1,4 @@
-﻿
+﻿using DO;
 namespace DalApi
 {
         public interface Icrud<T>
