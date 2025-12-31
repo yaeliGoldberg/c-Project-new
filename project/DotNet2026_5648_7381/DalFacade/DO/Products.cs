@@ -1,6 +1,6 @@
 ﻿namespace DO;
 
-public record  products
+public record  Products
 (
     int id,
     string name,
