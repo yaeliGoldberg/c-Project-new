@@ -3,7 +3,7 @@ using DalApi;
 
 
 namespace Dal;
-internal class ProductsImplementation : Iproducts
+public class ProductsImplementation : Iproducts
 {
     public int Create(Products item)
     {

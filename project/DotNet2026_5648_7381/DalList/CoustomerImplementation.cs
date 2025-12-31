@@ -3,7 +3,7 @@ using DalApi;
 
 namespace Dal;
 
-internal class CoustomerImplementation:Icoustomer
+public class CoustomerImplementation:Icoustomer
 {
     public int Create(Coustomer item)
     {

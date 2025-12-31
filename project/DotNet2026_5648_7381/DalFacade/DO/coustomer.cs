@@ -10,7 +10,7 @@ public record Coustomer
 (   int id,
     string name,
     string adress,
-    int phon
+    string phon
 
 )
     
