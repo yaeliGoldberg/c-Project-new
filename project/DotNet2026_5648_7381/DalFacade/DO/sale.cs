@@ -15,9 +15,13 @@ namespace DO;
     double min_price,
     bool for_who,
     DateTime start_sale,
-    DateTime end
+    DateTime end_sale
 
 )
 {
+    public Sale(): this(1,1,1,0,false,DateTime.Now,DateTime.Now)
+    {
+
+    }
 
 }

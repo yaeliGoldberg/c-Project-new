@@ -9,5 +9,8 @@ public record  Products
     int amount
 )
 {
+    public Products(): this(0,"",Categories.EYEGLASSES_LENSES,1.1,1)
+    {
 
+    }
 }

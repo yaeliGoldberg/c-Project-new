@@ -1,6 +1,7 @@
 ﻿using DO;
 using DalApi;
 
+
 namespace Dal;
 
 public class SaleImplementation:Isale

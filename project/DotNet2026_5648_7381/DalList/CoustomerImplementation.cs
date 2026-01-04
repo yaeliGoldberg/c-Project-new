@@ -5,30 +5,30 @@ namespace Dal;
 
 public class CoustomerImplementation:Icoustomer
 {
-    public int Create(Coustomer item)
+    public int Create(Customer item)
     {
         int newid = DataSource.Customers.Count > 0 ? DataSource.Customers.Max(c => c.id) + 1 : 1;
-        Coustomer newCustomer =item with { id = newid };
+        Customer newCustomer =item with { id = newid };
         DataSource.Customers.Add(newCustomer);
         return newid;
     }
-    public Coustomer? Read(int id)
+    public Customer? Read(int id)
     {
 
 
-        Coustomer x = DataSource.Customers.FirstOrDefault(c => c.id == id);
+        Customer x = DataSource.Customers.FirstOrDefault(c => c.id == id);
         if (x == null)
             throw new Exception($"coustomer {id}  is not exist");
         return x;
 
 
     }
-    public List<Coustomer> ReadAll()
+    public List<Customer> ReadAll()
     {
         return DataSource.Customers.ToList();
     }
    
-    public void Update(Coustomer item)
+    public void Update(Customer item)
     {
         Delete(item.id);
         DataSource.Customers.Add(item);
