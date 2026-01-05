@@ -6,5 +6,6 @@ public enum Categories
     SOLITION,
     EYEGLASSES_LENSES,
     SWIMMING_GOGGLES,
-    LENS_CLEANERS
+    LENS_CLEANERS,
+    SUNGLASSES
 }

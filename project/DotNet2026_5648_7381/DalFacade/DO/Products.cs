@@ -1,6 +1,6 @@
 ﻿namespace DO;
 
-public record  products
+public record  Products
 (
     int id,
     string name,
@@ -9,5 +9,8 @@ public record  products
     int amount
 )
 {
+    public Products(): this(0,"",Categories.EYEGLASSES_LENSES,1.1,1)
+    {
 
+    }
 }

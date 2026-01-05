@@ -4,21 +4,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DO
+namespace DO;
+
+ public record Sale
+(
+
+    int id,
+    int id_product,
+    int min_amount,
+    double min_price,
+    bool for_who,
+    DateTime start_sale,
+    DateTime end_sale
+
+)
 {
-    internal class sale
-    (
-
-        int id,
-        int id_product,
-        int min_amount,
-        double min_price,
-        bool for_who,
-        DateTime start_sale,
-        DateTime end
-
-    )
+    public Sale(): this(1,1,1,0,false,DateTime.Now,DateTime.Now)
     {
 
     }
+
 }

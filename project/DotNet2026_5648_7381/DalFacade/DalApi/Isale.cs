@@ -1,12 +1,11 @@
 ﻿using DO;
 
-namespace DalApi
+namespace DalApi;
+
+public interface Isale : Icrud<Sale>
 {
-    public interface Isale : Icrud<Sale>
-    {
-    
-            
-            
-           
-    }
+
+        
+        
+       
 }

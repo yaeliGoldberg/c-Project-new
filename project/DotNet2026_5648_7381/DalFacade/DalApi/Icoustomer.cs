@@ -2,7 +2,7 @@
 
 namespace DalApi
 {
-   public interface Icoustomer:Icrud<Coustomer>
+   public interface Icoustomer:Icrud<Customer>
     {
     }
 }
