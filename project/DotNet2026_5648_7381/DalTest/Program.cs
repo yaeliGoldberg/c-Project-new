@@ -2,24 +2,27 @@
 using DO;
 using Dal;
 
-
 namespace DalTest
 {
     public class Program
     {
-        private static IDal s_dal = new DalList(); // השדה הסטטי לשימוש בכל הפונקציות
 
+        private static IDal s_dal = new DalList(); // השדה הסטטי לשימוש בכל הפונקציות
+       
         public static void Main(string[] args)
         {
+           
             try
             {
+              
                 Initialization.Initialize(s_dal);
             }
-            catch (NotExistException e)
+            catch (DalNotExistException e)
             {
+              
                 Console.WriteLine(e.Message);
             }
-            catch (AlreadyExistException e)
+            catch (DalAlreadyExistException e)
             {
                 Console.WriteLine(e.Message);
             }
@@ -179,7 +182,7 @@ namespace DalTest
 
         private static Products getUserProduct(int id = 0)
         {
-            Console.WriteLine("insert name, category - 1 for Chocolate and so on..., price, quantity");
+            Console.WriteLine("insert name, category - 1 , price, quantity");
             string name = Console.ReadLine();
             int category = int.Parse(Console.ReadLine());
             double price = double.Parse(Console.ReadLine());
@@ -190,7 +193,7 @@ namespace DalTest
 
         private static Sale getUserSale(int id = 0)
         {
-            Console.WriteLine("insert productId, quantityRequired, totalPrice, isOnlyClub, startSale, endSale. Date format: 12/12/1090");
+            Console.WriteLine("insert id_product, min_amount, min_price, for_who, start_sale, end_sale. Date format: 12/12/1090");
             int productId = int.Parse(Console.ReadLine());
             int quantityRequired = int.Parse(Console.ReadLine());
             double totalPrice = double.Parse(Console.ReadLine());

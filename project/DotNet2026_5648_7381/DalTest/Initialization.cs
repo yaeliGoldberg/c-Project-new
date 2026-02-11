@@ -15,18 +15,16 @@ public static class Initialization
     public static void Initialize(IDal dal)
     {
         s_dal = dal;
-        CreateSales();
-
-        CreateCustomers();
-        CreateProducts();
+        CreateSales(s_dal.Sale);
+        CreateCustomers(s_dal.Customer);
+        CreateProducts(s_dal.Products);
 
     }
 
     // אתחול מוצרים
-    private static void CreateProducts()
+    private static void CreateProducts(Iproducts p)
     {
-       
-        ProductsImplementation p= new ProductsImplementation();
+        //List<int> l=new IList
        p.Create(new Products(11, "Johnson Lenses", Categories.LENSES, 50.5, 2));
         p.Create(new Products(12, "Acuvue Oasys", Categories.LENSES, 79.9, 10));
         p.Create(new Products(13, "Ray-Ban Sunglasses", Categories.SUNGLASSES, 399.0, 5));
@@ -35,10 +33,8 @@ public static class Initialization
     }
 
     // אתחול לקוחות
-    private static void CreateCustomers()
+    private static void CreateCustomers(Icoustomer c)
     {
-        CoustomerImplementation c = new CoustomerImplementation();
-
         c.Create(new Customer(1, "Ayala", "Meromei Sade", "123456789"));
         c.Create(new Customer(2, "Jon", "Ktsot", "1357925"));
         c.Create(new Customer(3, "Yehudit", "Shaagat Arie", "431221111"));
@@ -58,9 +54,8 @@ public static class Initialization
     }
 
     // אתחול מבצעים
-    private static void CreateSales()
+    private static void CreateSales(Isale s)
     {
-        SaleImplementation s = new SaleImplementation();
         s.Create(new Sale(
             1, 1, 12, 43.8, true,
             new DateTime(2025, 12, 31),

@@ -9,7 +9,28 @@ internal static class DataSource
     internal static List<Sale?> Sales = new List<Sale>();
 }
 
-internal static class Config
+internal static class Config1
+{
+    internal const int minimum = 1000;
+    private static int value_static = minimum;
+    public static int run_value_static
+    {
+        get { return value_static++; }
+    }
+}
+
+internal static class Config2
+{
+    internal const int minimum = 1000;
+    private static int value_static = minimum;
+    public static int run_value_static
+    {
+        get { return value_static++; }
+    }
+}
+
+
+internal static class Config3
 {
     internal const int minimum = 1000;
     private static int value_static = minimum;
