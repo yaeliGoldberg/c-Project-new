@@ -1,50 +1,9 @@
-﻿/*using DO;
-using DalApi;
-
-
-namespace Dal;
-internal class ProductsImplementation : Iproducts
-{
-    public int Create(Products item)
-    {//TODO
-        int newid = Config1.run_value_static;
-        Products newCustomer = item with { id = newid };
-        DataSource.Products.Add(newCustomer);
-        return newid;
-    }
-    public Products? Read(int id)
-    {
-
-
-        Products x = DataSource.Products.FirstOrDefault(c => c.id == id);
-        if (x == null)
-            throw new DalAlreadyExistException($"coustomer {id}  is not exist");
-        return x;
-
-
-    }
-    public List<Products> ReadAll()
-    {
-        return DataSource.Products.ToList();
-    }
-
-    public void Update(Products item)
-    {
-        Delete(item.id);
-        DataSource.Products.Add(item);
-
-    }
-    public void Delete(int id)
-    {
-        int i = DataSource.Products.FindIndex(c => c.id == id);
-        if (i == -1) throw new DalAlreadyExistException($"coustomer {id}  is not exist");
-        DataSource.Products.RemoveAt(i);
-    }
-}*/
-
-using DO;
+﻿using DO;
 using DalApi;
 using System.Linq;
+using System.Reflection;
+using Tools;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Dal;
 
@@ -52,6 +11,10 @@ internal class ProductsImplementation : Iproducts
 {
     public int Create(Products item)
     {
+        LogManager.WriteLog(MethodBase.GetCurrentMethod().DeclaringType.FullName,
+                     MethodBase.GetCurrentMethod().Name,
+                      "insert to function");
+
         int newid = Config1.run_value_static;
         Products newProduct = item with { id = newid };
 
@@ -60,27 +23,53 @@ internal class ProductsImplementation : Iproducts
             throw new DalAlreadyExistException($"Product with id {newid} already exists");
 
         DataSource.Products.Add(newProduct);
+
+        LogManager.WriteLog(MethodBase.GetCurrentMethod().DeclaringType.FullName,
+        MethodBase.GetCurrentMethod().Name,
+                      "Exiting the function"); 
+
         return newid;
     }
 
     public Products Read(int id)
     {
+        LogManager.WriteLog(MethodBase.GetCurrentMethod().DeclaringType.FullName,
+                     MethodBase.GetCurrentMethod().Name,
+                      "insert to function");
+
         // שימוש ב-LINQ כדי למצוא מוצר לפי ID
         Products? product = DataSource.Products.FirstOrDefault(p => p.id == id);
         if (product == null)
             throw new DalNotExistException($"Product with id {id} does not exist");
 
+        LogManager.WriteLog(MethodBase.GetCurrentMethod().DeclaringType.FullName,
+                     MethodBase.GetCurrentMethod().Name,
+                      "Exiting the function");
+
         return product;
     }
     public List<Products> ReadAll(Func<Products, bool>? filter = null)
     {
-        return filter == null
+        LogManager.WriteLog(MethodBase.GetCurrentMethod().DeclaringType.FullName,
+                     MethodBase.GetCurrentMethod().Name,
+                      "insert to function");
+        var result=filter == null
             ? DataSource.Products.ToList()
             : DataSource.Products.Where(filter).ToList();
+        LogManager.WriteLog(MethodBase.GetCurrentMethod().DeclaringType.FullName,
+                     MethodBase.GetCurrentMethod().Name,
+                      "Exiting the function");
+
+
+        return result;
     }
  
     public void Update(Products item)
     {
+
+        LogManager.WriteLog(MethodBase.GetCurrentMethod().DeclaringType.FullName,
+             MethodBase.GetCurrentMethod().Name,
+              "insert to function");
         // קודם בודקים אם המוצר קיים
         Products? existing = DataSource.Products.FirstOrDefault(p => p.id == item.id);
         if (existing == null)
@@ -89,10 +78,17 @@ internal class ProductsImplementation : Iproducts
         // הסרה והוספה מחדש
         DataSource.Products.Remove(existing);
         DataSource.Products.Add(item);
+        LogManager.WriteLog(MethodBase.GetCurrentMethod().DeclaringType.FullName,
+             MethodBase.GetCurrentMethod().Name,
+              "Exiting the function");
+
     }
 
     public void Delete(int id)
     {
+                LogManager.WriteLog(MethodBase.GetCurrentMethod().DeclaringType.FullName,
+             MethodBase.GetCurrentMethod().Name,
+              "insert to function");
         // מוצאים את המוצר לפי ID
         Products? existing = DataSource.Products.FirstOrDefault(p => p.id == id);
         if (existing == null)
@@ -100,10 +96,23 @@ internal class ProductsImplementation : Iproducts
 
         // הסרה מהרשימה
         DataSource.Products.Remove(existing);
+
+        LogManager.WriteLog(MethodBase.GetCurrentMethod().DeclaringType.FullName,
+             MethodBase.GetCurrentMethod().Name,
+              "Exiting the function");
     }
     public Products? Read(Func<Products, bool> filter)
     {
-        return DataSource.Products.FirstOrDefault(filter);
+        LogManager.WriteLog(MethodBase.GetCurrentMethod().DeclaringType.FullName,
+            MethodBase.GetCurrentMethod().Name,
+             "insert to function");
+        Products p= DataSource.Products.FirstOrDefault(filter);
+
+        LogManager.WriteLog(MethodBase.GetCurrentMethod().DeclaringType.FullName,
+            MethodBase.GetCurrentMethod().Name,
+             "Exiting the function");
+
+        return p;
     }
 
 }
