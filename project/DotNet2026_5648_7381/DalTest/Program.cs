@@ -1,6 +1,8 @@
 ﻿using DalApi;
 using DO;
 using Dal;
+using System.Reflection;
+using Tools;
 
 namespace DalTest
 {
@@ -21,14 +23,25 @@ namespace DalTest
             {
               
                 Console.WriteLine(e.Message);
+                LogManager.WriteLog(MethodBase.GetCurrentMethod().DeclaringType.FullName,
+                MethodBase.GetCurrentMethod().Name,
+                e.Message);
+
+
             }
             catch (DalAlreadyExistException e)
             {
                 Console.WriteLine(e.Message);
+                LogManager.WriteLog(MethodBase.GetCurrentMethod().DeclaringType.FullName,
+               MethodBase.GetCurrentMethod().Name,
+               e.Message);
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
+                LogManager.WriteLog(MethodBase.GetCurrentMethod().DeclaringType.FullName,
+               MethodBase.GetCurrentMethod().Name,
+               e.Message);
             }
 
             int num1 = 0;
@@ -50,6 +63,9 @@ namespace DalTest
             }
             catch (Exception e)
             {
+                LogManager.WriteLog(MethodBase.GetCurrentMethod().DeclaringType.FullName,
+                                     MethodBase.GetCurrentMethod().Name,
+                                      e.Message);
                 Console.WriteLine(e.Message);
             }
         }
