@@ -16,7 +16,6 @@ namespace DalTest
            
             try
             {
-              
                 Initialization.Initialize(s_dal);
             }
             catch (DalNotExistException e)
@@ -49,17 +48,18 @@ namespace DalTest
             {
                 do
                 {
-                    Console.WriteLine("insert 1 to customers, 2 to products, 3 to sales, 4 to exit");
+                    Console.WriteLine("insert 1 to customers, 2 to products, 3 to sales, 4 to clear log directory, 5 to exit");
                     num1 = int.Parse(Console.ReadLine());
                     switch (num1)
                     {
                         case 1: customersUser(); break;
                         case 2: productsUser(); break;
                         case 3: salesUser(); break;
-                        case 4: break;
+                        case 4: LogManager.CleanOldLogFolders(); break; // קריאה לפונקציה clear
+                        case 5: break;
                         default: Console.WriteLine("illegal num"); break;
                     }
-                } while (num1 != 4);
+                } while (num1 != 5);
             }
             catch (Exception e)
             {
