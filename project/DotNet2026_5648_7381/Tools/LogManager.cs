@@ -1,5 +1,4 @@
 ﻿namespace Tools;
-
 public class LogManager
 {
 
@@ -41,7 +40,6 @@ public class LogManager
         string fileName = $"Log_{DateTime.Now:yyyy_MM_dd}.txt";
         return Path.Combine(folderPath, fileName);
     }
-
 
     public static void WriteLog(string project, string funcName, string message)
     {

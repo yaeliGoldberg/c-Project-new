@@ -26,7 +26,6 @@ namespace DalTest
                 MethodBase.GetCurrentMethod().Name,
                 e.Message);
 
-
             }
             catch (DalAlreadyExistException e)
             {

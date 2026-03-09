@@ -1,7 +1,7 @@
 ﻿using DalApi;
 
 namespace Dal;
-public class DalList : IDal
+ public class DalList : IDal
 {
     public Icoustomer Customer => new CoustomerImplementation();
     public Iproducts Products => new ProductsImplementation();
