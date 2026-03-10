@@ -9,14 +9,14 @@ namespace DalTest
     public class Program
     {
 
-        private static IDal s_dal = new DalList(); // השדה הסטטי לשימוש בכל הפונקציות
-       
+        private static IDal s_dal = DalApi.Factory.Get;  // השדה הסטטי לשימוש בכל הפונקציות
+
         public static void Main(string[] args)
         {
            
             try
             {
-                Initialization.Initialize(s_dal);
+                Initialization.Initialize();
             }
             catch (DalNotExistException e)
             {

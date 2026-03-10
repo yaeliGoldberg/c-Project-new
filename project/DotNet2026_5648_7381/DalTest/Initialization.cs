@@ -12,9 +12,9 @@ public static class Initialization
 
     // המתודה הציבורית שמופעלת מהשכבה שמעל
 
-    public static void Initialize(IDal dal)
+    public static void Initialize()
     {
-        s_dal = dal;
+        s_dal = DalApi.Factory.Get;
         CreateSales(s_dal.Sale);
         CreateCustomers(s_dal.Customer);
         CreateProducts(s_dal.Products);
