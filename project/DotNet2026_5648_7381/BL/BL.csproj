@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+	  <BaseOutputPath>$(SolutionDir)\bin\</BaseOutputPath>
+	  <OutputPath>$(SolutionDir)\bin\</OutputPath>
+	  <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+	  <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+	  <UseCommonOutputDirectory>true</UseCommonOutputDirectory>
+	  <Nullable>enable</Nullable>
+	  <RootNamespace />
+	  
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DalFacade\DalFacade.csproj" />
+    <ProjectReference Include="..\DalList\DalList.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="BO\" />
+    <Folder Include="BlApi\" />
+    <Folder Include="Bllmplementation\" />
+  </ItemGroup>
+
+</Project>
