@@ -1,5 +1,10 @@
-﻿namespace DalApi;
-using static DalApi.DalConfig;
+﻿
+
+//צריך לשים בתוך דף DalConfig את הקוד מהמורה
+
+
+namespace DalApi;
+using static DalApi.Config;
 using System.Reflection;
 
 public static class Factory
