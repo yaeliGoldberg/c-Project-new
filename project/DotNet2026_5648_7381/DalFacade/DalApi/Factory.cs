@@ -4,7 +4,7 @@
 
 
 namespace DalApi;
-using static DalApi.Config;
+using static DalApi.DalConfig;
 using System.Reflection;
 
 public static class Factory

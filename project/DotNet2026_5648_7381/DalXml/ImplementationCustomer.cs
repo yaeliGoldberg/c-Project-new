@@ -80,16 +80,29 @@ internal class ImplementationCustomer : Icoustomer
         customerElement.Element("Phon")?.SetValue(item.phon);
         root.Save(path);
     }
-    public void Delete(Customer item)
+    public void Delete(int item)
     {
         XElement root = XElement.Load(path);
 
         XElement? customerElement = root.Elements("Customer")
-            .FirstOrDefault(c => (int)c.Element("Id") == item.id);
+            .FirstOrDefault(c => (int)c.Element("Id") == item);
         if (customerElement == null) return;
 
         // הסרת הלקוח
         customerElement.Remove();
         root.Save(path);
     }
+    public Customer? Read(Func<Customer, bool> filter)
+    {
+        XElement root = XElement.Load(path);
+
+        return root.Elements("Customer")
+            .Select(c => new Customer(
+                id: (int)c.Element("Id"),
+                name: (string)c.Element("Name"),
+                adress: (string)c.Element("Adress"),
+                phon: (string)c.Element("Phon")
+            ))
+            .FirstOrDefault(filter);
     }
+}
