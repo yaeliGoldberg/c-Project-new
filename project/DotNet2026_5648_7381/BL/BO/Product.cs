@@ -1,6 +1,4 @@
-﻿using DO;
-
-namespace BO;
+﻿namespace BO;
 
 public class Product
 {
@@ -10,6 +8,7 @@ public class Product
     public double Price { get; set; }
     public int Amount { get; set; }
 
+    public List<SaleInProduct> ListSaleInProduct { get; set; }
     public override string ToString() => this.ToStringProperty();
 }
   

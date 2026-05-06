@@ -1,5 +1,11 @@
 ﻿namespace BO;
 
-//internal class Enums
-//{
-//}
+public enum Categories
+{
+    LENSES,
+    SOLITION,
+    EYEGLASSES_LENSES,
+    SWIMMING_GOGGLES,
+    LENS_CLEANERS,
+    SUNGLASSES
+}
