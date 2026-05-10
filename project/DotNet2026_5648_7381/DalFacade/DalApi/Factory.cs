@@ -1,7 +1,4 @@
-﻿
-
-//צריך לשים בתוך דף DalConfig את הקוד מהמורה
-
+﻿//צריך לשים בתוך דף DalConfig את הקוד מהמורה
 
 namespace DalApi;
 using static DalApi.DalConfig;

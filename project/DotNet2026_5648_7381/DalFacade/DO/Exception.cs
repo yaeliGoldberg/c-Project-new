@@ -13,4 +13,11 @@ namespace DO
     {
         public DalAlreadyExistException(string message) : base(message) { }
     }
+    [Serializable]
+    public class DalException : Exception
+    {
+        public DalException(string m) : base(m)
+        {
+        }
+    }
 }
