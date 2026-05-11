@@ -16,5 +16,10 @@ namespace UI
         {
             InitializeComponent();
         }
+
+        private void Update_product_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

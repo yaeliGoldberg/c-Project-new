@@ -1,13 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ArrayOfProducts xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Products>
-    <id>3</id>
-    <name>Johnson Lenses</name>
-    <c>LENSES</c>
-    <price>50.5</price>
-    <amount>2</amount>
-  </Products>
-  <Products>
     <id>4</id>
     <name>Acuvue Oasys</name>
     <c>LENSES</c>
@@ -244,5 +237,12 @@
     <c>SOLITION</c>
     <price>25</price>
     <amount>50</amount>
+  </Products>
+  <Products>
+    <id>3</id>
+    <name>Johnson Lenses</name>
+    <c>LENSES</c>
+    <price>50.5</price>
+    <amount>0</amount>
   </Products>
 </ArrayOfProducts>

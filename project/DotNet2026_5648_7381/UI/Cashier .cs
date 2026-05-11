@@ -25,22 +25,22 @@ namespace UI
         private void View_the_catalog_Click(object sender, EventArgs e)
         {
             View_the_catalog view_the_catalog = new View_the_catalog();
-            view_the_catalog.ShowDialog();
-            this.Close();
+            view_the_catalog.Show();
+            //this.Hide();
         }
 
         private void Updating_existing_customer_details_Click(object sender, EventArgs e)
         {
             Updating_existing_customer updating_existing_customer = new Updating_existing_customer();
-            updating_existing_customer.ShowDialog();
-            this.Close();
+            updating_existing_customer.Show();
+            //this.Hide();
         }
 
         private void Make_a_purchase_for_customer__Click(object sender, EventArgs e)
         {
             Make_a_purchase_for_customer make_a_purchase_for_customer= new Make_a_purchase_for_customer();
-            make_a_purchase_for_customer.ShowDialog();
-            this.Close();
+            make_a_purchase_for_customer.Show();
+           // this.Hide();
         }
     }
 }
