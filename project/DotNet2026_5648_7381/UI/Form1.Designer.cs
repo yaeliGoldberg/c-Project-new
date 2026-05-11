@@ -28,12 +28,45 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "Form1";
+            Manager = new Button();
+            Salesperson = new Button();
+            SuspendLayout();
+            // 
+            // Manager
+            // 
+            Manager.Location = new Point(353, 117);
+            Manager.Name = "Manager";
+            Manager.Size = new Size(94, 29);
+            Manager.TabIndex = 0;
+            Manager.Text = "Manager";
+            Manager.UseVisualStyleBackColor = true;
+            Manager.Click += button1_Click;
+            // 
+            // Salesperson
+            // 
+            Salesperson.Location = new Point(353, 181);
+            Salesperson.Name = "Salesperson";
+            Salesperson.Size = new Size(94, 29);
+            Salesperson.TabIndex = 1;
+            Salesperson.Text = "Salesperson";
+            Salesperson.UseVisualStyleBackColor = true;
+            Salesperson.Click += Salesperson_Click;
+            // 
+            // Form1
+            // 
+            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(800, 450);
+            Controls.Add(Salesperson);
+            Controls.Add(Manager);
+            Name = "Form1";
+            Text = "Form1";
+            ResumeLayout(false);
         }
 
         #endregion
+
+        private Button Manager;
+        private Button Salesperson;
     }
 }
