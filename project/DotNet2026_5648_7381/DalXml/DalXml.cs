@@ -15,3 +15,7 @@ sealed internal class DalXml : IDal
     public static DalXml Instance => instance;
     private DalXml() { }
 }
+
+
+
+

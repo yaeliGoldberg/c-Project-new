@@ -1,6 +1,6 @@
 ﻿using BO;
 
-namespace BlImplementation
+/*namespace BlImplementation
 {
     internal class OrderImplementation:BlApi.IOrder   
     {
@@ -8,29 +8,33 @@ namespace BlImplementation
 
         public List<BO.SaleInProduct> AddProductToOrder(BO.Order order, int id, int quantity)
         {
+            order.ProductsInOrder ??= new List<ProductInOrder>();
             BO.ProductInOrder p = new ProductInOrder();
             bool flag = false;
-            foreach (var pr in order.ProductsInOrder)
-            {
-                if (pr.ProductId == id)
+            
+                foreach (var pr in order.ProductsInOrder)
                 {
-                    flag = true;
-                    p = pr;
-                    DO.Products doProduct = _dal.Products.Read(x => x.id == id);
-                    if (doProduct.amount < quantity + p.AmountInOrder)
-                        throw new BO.BlNotEnoughInStackException($"There are only {doProduct.amount} items from product {id}.");
-                    else
-                        p.AmountInOrder += quantity;
-                }
+                    if (pr.ProductId == id)
+                    {
+                        flag = true;
+                        p = pr;
+                        DO.Products doProduct = _dal.Products.Read(x => x.id == id);
+                        if (doProduct.amount < quantity + p.AmountInOrder)
+                            throw new BO.BlNotEnoughInStackException($"There are only {doProduct.amount} items from product {id}.");
+                        else
+                            p.AmountInOrder += quantity;
+                    }
+                
             }
+            
             if (!flag)
             {
                 DO.Products doProduct = _dal.Products.Read(x => x.id == id);
                 if (doProduct.amount < quantity)
-                    throw new BO.BlNotEnoughInStackException($"There are only {doProduct.QuantityInStack} items from product {id}.");
+                    throw new BO.BlNotEnoughInStackException($"There are only {doProduct.amount} items from product {id}.");
                 else
                 {
-                    p = new ProductInOrder() { ProductId = id, ProductName = doProduct.Name, BasePrice = doProduct.Price, ListSaleInProduct = new List<SaleInProduct>(), AmountInOrder = quantity };
+                    p = new ProductInOrder() { ProductId = id, ProductName = doProduct.name, BasePrice = doProduct.price, ListSaleInProduct = new List<SaleInProduct>(), AmountInOrder = quantity };
 
                 }
             }
@@ -87,18 +91,18 @@ namespace BlImplementation
             try
             {
                 var sales = _dal.Sale.ReadAll(s => s.id == product.ProductId)
-                .Where(s => s.start_sale <= DateTime.Now && s.end_sale >= DateTime.Now && product.AmountInOrder >= s.QuantityRequired);
+                .Where(s => s.start_sale <= DateTime.Now && s.end_sale >= DateTime.Now && product.AmountInOrder >= s.min_amount);
                 if (!isFavorite)
                 {
-                    sales = sales.Where(s => s?.IsOnlyClub == false);
+                    sales = sales.Where(s => s?.for_who == false);
                 }
-                sales=sales.OrderBy(s => s.TotalPrice / s.QuantityRequired);
+                sales=sales.OrderBy(s => s.min_price / s.min_amount);
                 var result = sales.Select(s => new BO.SaleInProduct
                 {
-                    SaleId = s.Id,
-                    AmountForSale = s.QuantityRequired,
-                    Price = s.TotalPrice,
-                    IsOnlyClub = s.IsOnlyClub
+                    SaleId = s.id,
+                    AmountForSale = s.min_amount,
+                    Price = s.min_price,
+                    IsOnlyClub = s.for_who
                 });
 
                 product.ListSaleInProduct = result.ToList();
@@ -109,5 +113,167 @@ namespace BlImplementation
             }
         }
 
+    }
+}*/
+
+using BO;
+
+namespace BlImplementation
+{
+    internal class OrderImplementation : BlApi.IOrder
+    {
+        private DalApi.IDal _dal = DalApi.Factory.Get;
+
+        public List<BO.SaleInProduct> AddProductToOrder(BO.Order order, int id, int quantity)
+        {
+            order.ProductsInOrder ??= new List<ProductInOrder>();
+
+            BO.ProductInOrder p = new ProductInOrder();
+            bool flag = false;
+
+            foreach (var pr in order.ProductsInOrder)
+            {
+                if (pr.ProductId == id)
+                {
+                    flag = true;
+                    p = pr;
+
+                    DO.Products doProduct = _dal.Products.Read(x => x.id == id);
+
+                    if (doProduct == null)
+                        throw new BO.BlException($"Product with id {id} not found");
+
+                    if (doProduct.amount < quantity + p.AmountInOrder)
+                        throw new BO.BlNotEnoughInStackException($"There are only {doProduct.amount} items from product {id}.");
+                    else
+                        p.AmountInOrder += quantity;
+                }
+            }
+
+            if (!flag)
+            {
+                DO.Products doProduct = _dal.Products.Read(x => x.id == id);
+
+                if (doProduct == null)
+                    throw new BO.BlException($"Product with id {id} not found");
+
+                if (doProduct.amount < quantity)
+                    throw new BO.BlNotEnoughInStackException($"There are only {doProduct.amount} items from product {id}.");
+                else
+                {
+                    p = new ProductInOrder()
+                    {
+                        ProductId = id,
+                        ProductName = doProduct.name,
+                        BasePrice = doProduct.price,
+                        ListSaleInProduct = new List<SaleInProduct>(),
+                        AmountInOrder = quantity
+                    };
+
+                    order.ProductsInOrder.Add(p);
+                }
+            }
+
+            SearchSaleForProduct(p, order.IsClub);
+            CalcTotalPriceForProduct(p);
+            CalcTotalPrice(order);
+
+            return p.ListSaleInProduct;
+        }
+
+        public void CalcTotalPrice(BO.Order order)
+        {
+            order.FinalPrice = 0;
+
+            foreach (var p in order.ProductsInOrder)
+            {
+                order.FinalPrice += p.TotalPrice;
+            }
+        }
+
+        public void CalcTotalPriceForProduct(BO.ProductInOrder product)
+        {
+            double total = 0;
+
+            List<SaleInProduct> usedSales = new List<SaleInProduct>();
+
+            int count = product.AmountInOrder;
+
+            foreach (var sale in product.ListSaleInProduct)
+            {
+                if (count < sale.AmountForSale)
+                    continue;
+
+                int times = (int)Math.Floor(count / (double)sale.AmountForSale);
+
+                total += (times * sale.Price);
+
+                count -= times * sale.AmountForSale;
+
+                usedSales.Add(sale);
+
+                if (count == 0)
+                    break;
+            }
+
+            total += (count * product.BasePrice);
+
+            product.TotalPrice = total;
+
+            product.ListSaleInProduct = usedSales.ToList();
+        }
+
+        public void DoOrder(BO.Order order)
+        {
+            foreach (var p in order.ProductsInOrder)
+            {
+                DO.Products doproduct = _dal.Products.Read(x => x.id == p.ProductId);
+
+                if (doproduct == null)
+                    throw new BO.BlException($"Product with id {p.ProductId} not found");
+
+                int amount = doproduct.amount;
+
+                DO.Products updatedProd = doproduct with
+                {
+                    amount = amount - p.AmountInOrder
+                };
+
+                _dal.Products.Update(updatedProd);
+            }
+        }
+
+        public void SearchSaleForProduct(BO.ProductInOrder product, bool isFavorite)
+        {
+            try
+            {
+                var sales = _dal.Sale.ReadAll(s => s.id == product.ProductId)
+                    .Where(s =>
+                        s.start_sale <= DateTime.Now &&
+                        s.end_sale >= DateTime.Now &&
+                        product.AmountInOrder >= s.min_amount);
+
+                if (!isFavorite)
+                {
+                    sales = sales.Where(s => s.for_who == false);
+                }
+
+                sales = sales.OrderBy(s => s.min_price / s.min_amount);
+
+                var result = sales.Select(s => new BO.SaleInProduct
+                {
+                    SaleId = s.id,
+                    AmountForSale = s.min_amount,
+                    Price = s.min_price,
+                    IsOnlyClub = s.for_who
+                });
+
+                product.ListSaleInProduct = result.ToList();
+            }
+            catch (DO.DalException ex)
+            {
+                throw new BO.BlException("Error reading products", ex);
+            }
+        }
     }
 }

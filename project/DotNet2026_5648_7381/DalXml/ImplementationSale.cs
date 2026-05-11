@@ -7,10 +7,35 @@ namespace Dal
 {
     internal class ImplementationSale : Isale
     {
+
+
+
         
-        private static string path = "xml/sale.xml";
+                //שורה ישנה
+                //private static string path = "xml/sale.xml";
+                private static string path = "../xml/sale.xml";
+
+        //שורות ישנות
         private XmlSerializer xmlSerializer = new XmlSerializer(typeof(List<Sale>));
-        private List<Sale> SaleList = (new XmlSerializer(typeof(List<Sale>))).Deserialize(new StreamReader(path)) as List<Sale>;
+                //private List<Sale> SaleList = (new XmlSerializer(typeof(List<Sale>))).Deserialize(new StreamReader(path)) as List<Sale>;
+
+                //שורות חדשות עד אחרי הבנאי
+                private List<Sale> SaleList;
+
+                public ImplementationSale()
+                {
+                    if (File.Exists(path))
+                    {
+                        using StreamReader sr = new StreamReader(path);
+                        SaleList = xmlSerializer.Deserialize(sr) as List<Sale>;
+                    }
+                    else
+                    {
+                        SaleList = new List<Sale>();
+                    }
+                }
+        
+
 
         public int Create(Sale item)
         {

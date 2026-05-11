@@ -7,8 +7,8 @@ namespace Dal;
 
 internal class ImplementationCustomer : Icoustomer
 {
-    string path = "xml/customers.xml";
-    public int Create(Customer customer)
+    string path = "../xml/customers.xml";
+    /*public int Create(Customer customer)
     {
         
         XElement root = XElement.Load(path);
@@ -24,6 +24,33 @@ internal class ImplementationCustomer : Icoustomer
         root.Save(path);
         return newId;
 
+    }*/
+
+    public int Create(Customer customer)
+    {
+        XElement root;
+
+        if (File.Exists(path))
+            root = XElement.Load(path);
+        else
+            root = new XElement("Customers");
+
+        int newId = Config.CustomerNum;
+
+        Customer newCustomer = customer with { id = newId };
+
+        XElement customerElement = new XElement("Customer",
+            new XElement("Id", newCustomer.id),
+            new XElement("Name", newCustomer.name),
+            new XElement("Adress", newCustomer.adress),
+            new XElement("Phon", newCustomer.phon)
+        );
+
+        root.Add(customerElement);
+
+        root.Save(path);
+
+        return newId;
     }
     public Customer? Read(int id)
     {

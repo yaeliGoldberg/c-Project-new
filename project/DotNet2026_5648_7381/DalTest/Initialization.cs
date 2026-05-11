@@ -13,19 +13,18 @@ public static class Initialization
     // המתודה הציבורית שמופעלת מהשכבה שמעל
 
     public static void Initialize()
-    {
+    {  
         s_dal = DalApi.Factory.Get;
         CreateSales(s_dal.Sale);
         CreateCustomers(s_dal.Customer);
         CreateProducts(s_dal.Products);
-
     }
 
     // אתחול מוצרים
     private static void CreateProducts(Iproducts p)
     {
         //List<int> l=new IList
-       p.Create(new Products(11, "Johnson Lenses", Categories.LENSES, 50.5, 2));
+        p.Create(new Products(11, "Johnson Lenses", Categories.LENSES, 50.5, 2));
         p.Create(new Products(12, "Acuvue Oasys", Categories.LENSES, 79.9, 10));
         p.Create(new Products(13, "Ray-Ban Sunglasses", Categories.SUNGLASSES, 399.0, 5));
         p.Create(new Products(14, "Reading Glasses +1.5", Categories.SWIMMING_GOGGLES, 120.0, 20));

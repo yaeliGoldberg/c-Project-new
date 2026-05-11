@@ -2,17 +2,22 @@
 using System.Xml.Serialization;
 using DalApi;
 using DO;
+using System.IO;
 
 namespace Dal
 {
-    internal class ImplementationProduct : Iproducts
+    /*internal class ImplementationProduct : Iproducts
     {
-        
-        private static string path = "xml/products.xml";
+        //ישן
+        // private static string path = "xml/products.xml";
+        //חדש
+       
+        private static string path = "../xml/products.xml";
+
         private XmlSerializer xmlSerializer = new XmlSerializer(typeof(List<Products>));
         private List<Products> ProductsList = (new XmlSerializer(typeof(List<Products>))).Deserialize(new StreamReader(path)) as List<Products>;
 
-        public int Create(Products item)
+        /*public int Create(Products item)
         {
             int newId = Config.ProductNum;
             Products newProduct = item with { id = newId };
@@ -24,6 +29,21 @@ namespace Dal
                 ProductsList.Add(newProduct);
                 xmlSerializer.Serialize(writer, ProductsList);
             }
+            return newId;
+        }
+        //שינוי חדש
+        public int Create(Products item)
+        {
+            int newId = Config.ProductNum;
+            Products newProduct = item with { id = newId };
+
+            ProductsList.Add(newProduct);
+
+            using (FileStream fs = new FileStream(path, FileMode.Create, FileAccess.Write, FileShare.None))
+            {
+                xmlSerializer.Serialize(fs, ProductsList);
+            }
+
             return newId;
         }
 
@@ -68,6 +88,88 @@ namespace Dal
                     ProductsList.Remove(sale);
                     ProductsList.Add(item);
                 }
+                xmlSerializer.Serialize(writer, ProductsList);
+            }
+        }
+    }*/
+
+    internal class ImplementationProduct : Iproducts
+    {
+        private static string path = "../xml/products.xml";
+
+        private XmlSerializer xmlSerializer = new XmlSerializer(typeof(List<Products>));
+        private List<Products> ProductsList;
+
+        public ImplementationProduct()
+        {
+            if (File.Exists(path))
+            {
+                using StreamReader sr = new StreamReader(path);
+                ProductsList = xmlSerializer.Deserialize(sr) as List<Products>;
+            }
+            else
+            {
+                ProductsList = new List<Products>();
+            }
+        }
+
+        public int Create(Products item)
+        {
+            int newId = Config.ProductNum;
+            Products newProduct = item with { id = newId };
+
+            ProductsList.Add(newProduct);
+
+            using (FileStream fs = new FileStream(path, FileMode.Create, FileAccess.Write, FileShare.None))
+            {
+                xmlSerializer.Serialize(fs, ProductsList);
+            }
+
+            return newId;
+        }
+
+        public void Delete(int id)
+        {
+            using (StreamWriter writer = new StreamWriter(path))
+            {
+                Products p = ProductsList.FirstOrDefault(x => x.id == id);
+                if (p != null)
+                    ProductsList.Remove(p);
+
+                xmlSerializer.Serialize(writer, ProductsList);
+            }
+        }
+
+        public Products Read(int id)
+        {
+            return ProductsList.FirstOrDefault(x => x.id == id);
+        }
+
+        public Products Read(Func<Products, bool> filter)
+        {
+            return ReadAll(filter).FirstOrDefault();
+        }
+
+        public List<Products> ReadAll(Func<Products, bool>? filter = null)
+        {
+            if (filter == null)
+                return ProductsList;
+
+            return ProductsList.Where(filter).ToList();
+        }
+
+        public void Update(Products item)
+        {
+            using (StreamWriter writer = new StreamWriter(path))
+            {
+                Products existing = ProductsList.FirstOrDefault(x => x.id == item.id);
+
+                if (existing != null)
+                {
+                    ProductsList.Remove(existing);
+                    ProductsList.Add(item);
+                }
+
                 xmlSerializer.Serialize(writer, ProductsList);
             }
         }

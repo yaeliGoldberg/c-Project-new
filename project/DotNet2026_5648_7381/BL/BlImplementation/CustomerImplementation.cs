@@ -76,7 +76,7 @@ internal class CustomerImplementation : BlApi.Icoustomer
     {
         try
         {
-            return _dal.Customer.ReadAll(x => true).Any(c => c?.Id == item.Id);
+            return _dal.Customer.ReadAll(x => true).Any(c => c?.id == item.Id);
 
         }
         catch (DO.DalException ex)

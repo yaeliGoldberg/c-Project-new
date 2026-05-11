@@ -16,7 +16,7 @@ public class Order
         FinalPrice = finalPrice;
     }
 
-    public override string ToString() =>
-            this.ToStringProperty();
+    public override string ToString() => this.ToStringProperty();
+    }
 
 
