@@ -1,20 +1,33 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿
 
-namespace UI
+namespace UI;
+
+public partial class Manager : Form
 {
-    public partial class Manager : Form
+    public Manager()
     {
-        public Manager()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
+    }
+    //ניהול מוצר
+    private void Product_Management_Click(object sender, EventArgs e)
+    {
+        Product_Management Product = new Product_Management();
+        Product.ShowDialog();
+        this.Close();
+    }
+    //ניהול הזמנת מוצר
+    private void Product_Order_Management_Click(object sender, EventArgs e)
+    {
+
+        Product_Order_Management Product_Order = new Product_Order_Management();
+        Product_Order.ShowDialog();
+        this.Close();
+    }
+    //ניהול מבצעים
+    private void Promotion_Management_Click(object sender, EventArgs e)
+    {
+        Promotion_Management manager = new Promotion_Management();
+        manager.ShowDialog();
+        this.Close();
     }
 }
