@@ -18,9 +18,9 @@ namespace UI
         //;סוכן מכירות
         private void Salesperson_Click(object sender, EventArgs e)
         {
-            Salesperson salesperson = new Salesperson();
-            salesperson.ShowDialog();
-            this.Close();
+            
+
+
         }
     }
 }

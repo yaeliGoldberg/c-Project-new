@@ -9,6 +9,7 @@ namespace UI
         public Product_Management()
         {
             InitializeComponent();
+            listBox1.DisplayMember = "Name";
         }
 
         private void Product_List_Click(object sender, EventArgs e)
@@ -33,6 +34,20 @@ namespace UI
             Adding_a_new_product Product = new Adding_a_new_product();
             Product.ShowDialog();
             this.Close();
+        }
+
+        private void Update_product_Click(object sender, EventArgs e)
+        {
+            if (listBox1.SelectedItem == null)
+            {
+                MessageBox.Show("יש לבחור מוצר מהרשימה כדי לעדכן אותו");
+                return;
+            }
+
+            BO.Product product = listBox1.SelectedItem as BO.Product;
+
+            Update_product update = new Update_product(product);
+            update.Show();
         }
     }
 }
