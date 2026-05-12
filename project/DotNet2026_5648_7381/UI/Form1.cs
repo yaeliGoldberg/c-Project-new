@@ -7,7 +7,7 @@ namespace UI
             InitializeComponent();
         }
 
-        //ордм
+        //пїЅпїЅпїЅпїЅ
         private void button1_Click(object sender, EventArgs e)
         {
             Manager manager = new Manager();
@@ -15,7 +15,7 @@ namespace UI
             this.Close();
         }
         
-        //;селп олйшеъ
+        //;пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
         private void Salesperson_Click(object sender, EventArgs e)
         {
             Cashier cashier = new Cashier();

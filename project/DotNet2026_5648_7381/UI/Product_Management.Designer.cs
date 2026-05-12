@@ -46,7 +46,7 @@
             // 
             // Add_a_product
             // 
-            Add_a_product.Location = new Point(650, 91);
+            Add_a_product.Location = new Point(650, 104);
             Add_a_product.Name = "Add_a_product";
             Add_a_product.Size = new Size(100, 50);
             Add_a_product.TabIndex = 1;
@@ -56,12 +56,13 @@
             // 
             // Update_product
             // 
-            Update_product.Location = new Point(650, 147);
+            Update_product.Location = new Point(650, 171);
             Update_product.Name = "Update_product";
             Update_product.Size = new Size(100, 50);
             Update_product.TabIndex = 2;
-            Update_product.Text = "לעדכן מוצר חדש";
+            Update_product.Text = "לעדכן מוצר קיים";
             Update_product.UseVisualStyleBackColor = true;
+            Update_product.Click += Update_product_Click;
             // 
             // listBox1
             // 
