@@ -945,4 +945,13 @@
     <start_sale>2015-12-31T00:00:00</start_sale>
     <end_sale>2026-12-31T00:00:00</end_sale>
   </Sale>
+  <Sale>
+    <id>10</id>
+    <id_product>1</id_product>
+    <min_amount>3</min_amount>
+    <min_price>4</min_price>
+    <for_who>true</for_who>
+    <start_sale>2026-05-12T12:01:17.6870507+03:00</start_sale>
+    <end_sale>2026-05-12T12:01:17.6792621+03:00</end_sale>
+  </Sale>
 </ArrayOfSale>
