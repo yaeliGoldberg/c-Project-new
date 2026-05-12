@@ -41,5 +41,10 @@ namespace UI
 
             bl.Product.Update(product);
         }
+
+        private void Update_product_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

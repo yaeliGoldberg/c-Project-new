@@ -14,10 +14,15 @@
 
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\BL\BL.csproj" />
-    <ProjectReference Include="..\DalList\DalList.csproj" />
-    <ProjectReference Include="..\DalXml\DalXml.csproj" />
-  </ItemGroup>
+ 
+   <ItemGroup>
+  <ProjectReference Include="..\BL\BL.csproj" />
+  <ProjectReference Include="..\DalList\DalList.csproj" />
+  <ProjectReference Include="..\DalXml\DalXml.csproj" />
+</ItemGroup>
+ 
+   
+ 
 
+  
 </Project>

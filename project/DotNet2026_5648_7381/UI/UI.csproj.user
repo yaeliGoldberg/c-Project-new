@@ -4,7 +4,13 @@
     <Compile Update="Adding_a_new_product.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Cashier .cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Make_a_purchase_for_customer.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Manager.cs">
@@ -23,6 +29,12 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Update_product.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Updating_existing_customer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="View_the_catalog.cs">
       <SubType>Form</SubType>
     </Compile>
   </ItemGroup>

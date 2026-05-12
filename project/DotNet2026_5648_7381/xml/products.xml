@@ -1,13 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ArrayOfProducts xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Products>
-    <id>3</id>
-    <name>Johnson Lenses</name>
-    <c>LENSES</c>
-    <price>50.5</price>
-    <amount>2</amount>
-  </Products>
-  <Products>
     <id>4</id>
     <name>Acuvue Oasys</name>
     <c>LENSES</c>
@@ -174,5 +167,82 @@
     <c>SOLITION</c>
     <price>25</price>
     <amount>50</amount>
+  </Products>
+  <Products>
+    <id>0</id>
+    <name>Johnson Lenses</name>
+    <c>LENSES</c>
+    <price>50.5</price>
+    <amount>2</amount>
+  </Products>
+  <Products>
+    <id>1</id>
+    <name>Acuvue Oasys</name>
+    <c>LENSES</c>
+    <price>79.9</price>
+    <amount>10</amount>
+  </Products>
+  <Products>
+    <id>2</id>
+    <name>Ray-Ban Sunglasses</name>
+    <c>SUNGLASSES</c>
+    <price>399</price>
+    <amount>5</amount>
+  </Products>
+  <Products>
+    <id>3</id>
+    <name>Reading Glasses +1.5</name>
+    <c>SWIMMING_GOGGLES</c>
+    <price>120</price>
+    <amount>20</amount>
+  </Products>
+  <Products>
+    <id>4</id>
+    <name>Lens Cleaning Kit</name>
+    <c>SOLITION</c>
+    <price>25</price>
+    <amount>50</amount>
+  </Products>
+  <Products>
+    <id>5</id>
+    <name>Johnson Lenses</name>
+    <c>LENSES</c>
+    <price>50.5</price>
+    <amount>2</amount>
+  </Products>
+  <Products>
+    <id>6</id>
+    <name>Acuvue Oasys</name>
+    <c>LENSES</c>
+    <price>79.9</price>
+    <amount>10</amount>
+  </Products>
+  <Products>
+    <id>7</id>
+    <name>Ray-Ban Sunglasses</name>
+    <c>SUNGLASSES</c>
+    <price>399</price>
+    <amount>5</amount>
+  </Products>
+  <Products>
+    <id>8</id>
+    <name>Reading Glasses +1.5</name>
+    <c>SWIMMING_GOGGLES</c>
+    <price>120</price>
+    <amount>20</amount>
+  </Products>
+  <Products>
+    <id>9</id>
+    <name>Lens Cleaning Kit</name>
+    <c>SOLITION</c>
+    <price>25</price>
+    <amount>50</amount>
+  </Products>
+  <Products>
+    <id>3</id>
+    <name>Johnson Lenses</name>
+    <c>LENSES</c>
+    <price>50.5</price>
+    <amount>0</amount>
   </Products>
 </ArrayOfProducts>
